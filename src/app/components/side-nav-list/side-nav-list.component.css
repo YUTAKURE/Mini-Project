@@ -1,0 +1,16 @@
+.mat-nav-list {
+  width: 250px; /* サイドナビの幅 */
+}
+
+.mat-list-item {
+  padding: 10px 20px;
+  color: #333;
+}
+
+.mat-list-item:hover {
+  background-color: #e0e0e0;
+}
+
+.nav-caption {
+  margin-left: 10px;
+}

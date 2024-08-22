@@ -1,0 +1,39 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.navigation-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.navigation-items li {
+  margin-right: 15px;
+  border-right: 1px solid #fff; /* アイテム間の仕切り線 */
+  padding-right: 15px;
+}
+
+.navigation-items li:last-child {
+  margin-right: 0;
+}
+
+.navigation-items li a {
+  color: white;
+  text-decoration: none;
+}
+
+.navigation-items li a:hover {
+  text-decoration: underline;
+}
+
+.loginAndRegister {
+  margin-left: auto; /* これにより要素が右端に寄せられる */
+  display: flex;
+  align-items: center;
+}
