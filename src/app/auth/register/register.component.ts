@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth-service.service';
-import { MaterialModule } from '../../material/material.module';
-// import { LoginData } from '../login-data';
+import { LoginData } from '../../login-data';
 
 @Component({
   selector: 'app-register',
@@ -43,6 +42,7 @@ export class RegisterComponent implements OnInit {
   constructor(public authService: AuthService) {}
 
   ngOnInit(): void {}
+
   register() {
     this.showSpinner = true;
     this.showMessage = false;
@@ -51,24 +51,13 @@ export class RegisterComponent implements OnInit {
     console.log(JSON.stringify(this.registrationForm.value, null, 2));
     let email = this.registrationForm.value['email'];
     let password = this.registrationForm.value['password'];
-    // let data: LoginData = { email: email, password: password }
+    let data: LoginData = { email: email ?? '', password: password ?? '' };
     // this.authService.SignUp(data.email, data.password);
     // this.authService.SignUp(data.email, data.password);
-    // .subscribe(answer => {
+    // .subscribe((answer: any) => {
     //     console.log(answer);
     //     this.showSpinner = false;
     //     this.showMessage = true;
     // });
   }
 }
-
-// import { Component, OnInit } from '@angular/core';
-// import { FormControl, FormGroup, Validators } from '@angular/forms';
-// import { AuthService } from '../auth.service';
-// import { LoginData } from '../login-data';
-
-// @Component({
-//     selector: 'app-register',
-//     templateUrl: './register.component.html',
-//     styleUrls: ['./register.component.css']
-// })

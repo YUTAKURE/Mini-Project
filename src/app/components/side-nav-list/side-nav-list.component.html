@@ -1,5 +1,5 @@
-<mat-nav-list>
-    <a mat-list-item routerLink="/home" (click)="onSidenavClose()">
+<mat-nav-list class="mat-nav-list">
+    <a class="align" mat-list-item routerLink="/home" (click)="onSidenavClose()">
         <mat-icon>home</mat-icon>
         <span class="nav-caption">Home</span>
     </a>
@@ -13,7 +13,7 @@
     </a>
     <mat-list-item [matMenuTriggerFor]="menu">
         <mat-icon matListIcon>unfold_more</mat-icon>
-        <a matLine>profile</a>
+        <a matLine class="nav-caption">profile</a>
     </mat-list-item>
     <mat-menu #menu="matMenu">
         <button mat-menu-item (click)="onSidenavClose()">profile</button>

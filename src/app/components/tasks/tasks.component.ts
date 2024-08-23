@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { Task } from '../../task';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { TaskService } from '../../services/task.service';
 
 @Component({
   selector: 'app-tasks',
@@ -9,6 +11,13 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
+  tasks: any[] = [];
+
+  constructor(
+    private taskService: TaskService,
+    private firestore: AngularFirestore
+  ) {}
+
   showMessage = false;
   submitted = false;
   todo: Task[] = [
@@ -54,47 +63,50 @@ export class TasksComponent {
       event.currentIndex
     );
 
-    //console.log(event.container)//all parameters
-    //console.log(event.container.id)//todo, inProgress, done
-    //console.log(event.container.data)//data of new array
-    event.container.data[0].list = event.container.id;
+    // console.log(event.container)//all parameters
+    // console.log(event.container.id)//todo, inProgress, done
+    // console.log(event.container.data)//data of new array
+    // event.container.data[0].list = event.container.id;
     // We want to update on firebase the status of mission
     this.update(event.container.data[0]);
   }
 
-  update(task: Task) {
-    this.taskService.update(task).then((res) => {
-      console.log(res);
-    });
-  }
-
   getAllTask() {
     let userDoc = this.firestore.firestore.collection('tasks');
-    userDoc.get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        console.log(doc.id, '=>', doc.data());
+    userDoc.get().then((querySnapshot: any) => {
+      querySnapshot.forEach(
+        (doc: {
+          id: any;
+          data: () => { (): any; new (): any; [x: string]: any };
+        }) => {
+          console.log(doc.id, '=>', doc.data());
 
-        let t1: Task = {
-          id: doc.id,
-          title: doc.data()['title'],
-          description: doc.data()['description'],
-          list: doc.data()['list'],
-        };
+          let t1: Task = {
+            id: doc.id,
+            title: doc.data()['title'],
+            description: doc.data()['description'],
+            list: doc.data()['list'],
+          };
 
-        if (t1.list === 'todo') this.todo.push(t1);
-        else if (t1.list === 'inProgress') this.inProgress.push(t1);
-        else if (t1.list === 'done') this.done.push(t1);
-      });
+          if (t1.list === 'todo') this.todo.push(t1);
+          else if (t1.list === 'inProgress') this.inProgress.push(t1);
+          else if (t1.list === 'done') this.done.push(t1);
+        }
+      );
     });
   }
 
   ngOnInit(): void {
     this.getAllTask();
+
+    this.taskService.firestoreCollection.valueChanges().subscribe((item) => {
+      this.tasks = item;
+    });
   }
 
   deleteIt(list: string, task: Task) {
     // Call service function and update the correct list
-    this.taskService.deleteTask(task).then((res) => {
+    this.taskService.deleteTask(task).then((res: any) => {
       if (list === 'todo') {
         var index = this.todo.indexOf(task);
         this.todo.splice(index, 1);
@@ -108,11 +120,6 @@ export class TasksComponent {
     });
   }
 
-  constructor(
-    private taskService: TaskService,
-    private firestore: AngularFirestore
-  ) {}
-
   addTask() {
     let title = this.addTaskForm.value['title'];
     let description = this.addTaskForm.value['description'];
@@ -121,11 +128,19 @@ export class TasksComponent {
       description: description,
       list: 'todo',
     } as Task;
-    this.taskService.addTask(t).then((res) => {
+    this.taskService.addTask(t).then((res: { id: string | undefined }) => {
       // Call addTask service
       console.log(res.id);
       t.id = res.id; // Update id of local task
       this.todo.push(t); // Push the task to "todo" list
     });
   }
+
+  update(task: Task) {
+    this.taskService.update(task).then((res: any) => {
+      console.log(res);
+    });
+  }
+
+  editTask(a: any, b: any) {}
 }

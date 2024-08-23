@@ -1,0 +1,14 @@
+<div class="input-group">
+    <input type="text" class="form-control border-0 py-3 shadow-none" placeholder="Title" #titleInput>
+    <input type="text" class="form-control border-0 py-3 shadow-none" placeholder="Description" #descriptionInput>
+    <button class="btn text-success border-0" (click)="onClick(titleInput, descriptionInput)">
+        click
+    </button>
+</div>
+<ul class="list-group">
+    <li class="list-group-item mb-2 border py-3 rounded-3" *ngFor="let item of todos">
+        <span>
+            Title: {{item.title}} / Description: {{item.description}}
+        </span>
+    </li>
+</ul>

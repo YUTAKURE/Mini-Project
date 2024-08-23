@@ -1,14 +1,3 @@
-// import { NgModule } from '@angular/core';
-// import { CommonModule } from '@angular/common';
-// import { RegisterComponent } from './register/register.component';
-// import { LoginComponent } from './login/login.component';
-
-// @NgModule({
-//   declarations: [RegisterComponent, LoginComponent],
-//   imports: [CommonModule,],
-// })
-// export class AuthModule {}
-
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './login/login.component';
@@ -31,10 +20,9 @@ import { MaterialModule } from '../material/material.module';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    // MaterialModule,
-    AngularFireAuthModule,
-    AngularFireModule.initializeApp(environment.firebase), // Auth module imports
     MaterialModule,
+    AngularFireAuthModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig), // Auth module imports
   ],
   exports: [LoginComponent, RegisterComponent],
   providers: [],

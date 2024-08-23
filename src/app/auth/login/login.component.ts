@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../auth-service.service';
-// import { LoginData } from '../login-data';
+import { LoginData } from '../../login-data';
 
 @Component({
   selector: 'app-login',
@@ -44,7 +44,7 @@ export class LoginComponent {
     // console.log(JSON.stringify(this.loginForm.value, null, 2));
     let email = this.loginForm.value['email'];
     let password = this.loginForm.value['password'];
-    // let data: LoginData = { email: email, password: password };
+    let data: LoginData = { email: email ?? '', password: password ?? '' };
     // // this.authService.SignUp(data.email, data.password);
     // this.authService.SignIn(data.email, data.password);
     // .subscribe(answer => {

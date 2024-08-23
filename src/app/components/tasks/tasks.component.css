@@ -1,3 +1,7 @@
+.box {
+  height: 80vh; /* ビューポートの高さの80%を使用 */
+}
+
 .content-wrapper {
   max-width: 1400px;
   margin: auto;

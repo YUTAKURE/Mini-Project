@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from '@angular/fire/compat/firestore';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+} from '@angular/fire/compat/firestore';
 import { Observable, of } from 'rxjs';
 import { Task } from '../task';
 
@@ -7,7 +10,12 @@ import { Task } from '../task';
   providedIn: 'root',
 })
 export class TaskService {
-  constructor(private firestore: AngularFirestore) {}
+  firestoreCollection: AngularFirestoreCollection;
+
+  constructor(private firestore: AngularFirestore) {
+    this.firestoreCollection = firestore.collection('tasks');
+  }
+
   addTask(task: Task) {
     let userDoc = this.firestore.firestore.collection('tasks').add(task);
     return userDoc;
