@@ -1,3 +1,17 @@
 .box {
-  height: 100vh; /* ビューポートの高さの80%を使用 */
+  height: 80vh; /* ビューポートの高さの80%を使用 */
+}
+
+h1,
+p {
+  text-align: center;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 100px;
+  color: rgb(70, 70, 70);
+}
+
+p {
+  font-size: large;
+  font-weight: bold;
 }

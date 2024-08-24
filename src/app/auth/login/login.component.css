@@ -2,8 +2,8 @@
 .box {
   display: flex;
   justify-content: center; /* 中央に配置 */
-  margin-top: 100px;
-  height: 100vh; /* ビューポートの高さの80%を使用 */
+  margin-top: 70px;
+  height: 75vh;
   padding: 20px;
 }
 

@@ -1,6 +1,6 @@
 .box {
   width: 90%;
-  height: 100vh; /* ビューポートの高さの80%を使用 */
+  height: 90vh; /* ビューポートの高さの80%を使用 */
 }
 
 .content-wrapper {
