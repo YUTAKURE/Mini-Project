@@ -11,8 +11,12 @@ import { Task } from '../task';
 export class TodoService {
   firestoreCollection: AngularFirestoreCollection;
 
+  // constructor(private firestore: AngularFirestore) {
+  //   this.firestoreCollection = firestore.collection('todos');
+  // }
+
   constructor(private firestore: AngularFirestore) {
-    this.firestoreCollection = firestore.collection('todos');
+    this.firestoreCollection = firestore.collection('tasks');
   }
 
   addTodo(title: string, description: string) {
@@ -24,6 +28,17 @@ export class TodoService {
       description,
       list: 'todo',
     };
+    this.firestore.collection<Task>('tasks').doc(id).set(params);
+
+    // addTodo(title: string, description: string) {
+    //   const id = this.firestore.createId();
+
+    //   const params: Task = {
+    //     id,
+    //     title,
+    //     description,
+    //     list: 'todo',
+    //   };
 
     // this.firestoreCollection.add({
     //   id,
@@ -31,7 +46,7 @@ export class TodoService {
     //   description,
     //   list: 'todo',
     // });
-    this.firestore.collection<Task>('todos').doc(id).set(params);
+    // this.firestore.collection<Task>('todos').doc(id).set(params);
   }
 
   updateTodoStatus(id: string, newStatus: boolean) {

@@ -1,8 +1,16 @@
-button {
+.btn {
   padding: 5px 20px;
   border-radius: 5px;
+  transition: 0.2s;
+}
+.btn:hover {
+  transform: scale(0.98);
+  background: rgb(207, 207, 207);
 }
 
-div {
+.input-group {
+  display: flex;
+  padding: 40px 25px;
   height: 30px;
+  gap: 10px;
 }

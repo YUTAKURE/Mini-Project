@@ -5,4 +5,10 @@
 .item {
   margin-bottom: 10px;
   cursor: pointer;
+  padding: 10px 0 15px 20px;
+}
+
+span {
+  color: rgb(176, 176, 176);
+  margin-bottom: -15px;
 }

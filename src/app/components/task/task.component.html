@@ -1,5 +1,7 @@
 <mat-card class="item" *ngIf="task" (dblclick)="edit.emit(task)">
+    <span class="title">title</span>
     <h2>{{ task.title }}</h2>
+    <span class="description">description</span>
     <p>{{ task.description }}</p>
     <button (click)="delete.emit(task)" mat-fab color="primary" aria-label="Delete">
         <mat-icon>delete</mat-icon>

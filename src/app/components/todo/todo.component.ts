@@ -23,5 +23,9 @@ export class TodoComponent implements OnInit {
       titleInput.value = '';
       descriptionInput.value = '';
     }
+
+    setTimeout(() => {
+      window.location.reload();
+    }, 600);
   }
 }

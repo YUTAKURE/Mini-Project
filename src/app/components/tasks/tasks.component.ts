@@ -1,21 +1,22 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Task } from '../../task';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { TaskService } from '../../services/task.service';
+import { TodoService } from '../../shared/todo.service';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })
-export class TasksComponent {
+export class TasksComponent implements OnInit {
   tasks: any[] = [];
-
   constructor(
     private taskService: TaskService,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    private todoService: TodoService
   ) {}
 
   showMessage = false;
