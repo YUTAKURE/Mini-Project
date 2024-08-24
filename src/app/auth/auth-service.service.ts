@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { User } from '../user';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -21,25 +20,37 @@ export class AuthService {
         this.userData = user;
         localStorage.setItem('user', JSON.stringify(this.userData));
         let item = localStorage.getItem('user');
-        console.log(user.toJSON());
-        if (user) {
-          this.login = true;
-          this.router.navigate(['home']);
-        }
-      } else {
-        localStorage.setItem('user', '');
-        this.login = false;
-        this.router.navigate(['login']);
+        console.log('item', item);
+        // if (user) {
+        //   this.login = true;
+        //   this.router.navigate(['home']);
+        // }
       }
+      // else {
+      //   localStorage.setItem('user', '');
+      //   this.login = false;
+      //   this.router.navigate(['login']);
+      // }
     });
   }
 
   SignUp(email: string, password: string): Observable<any> {
-    this.login = true;
-    return of(this.afAuth.createUserWithEmailAndPassword(email, password));
+    return from(this.afAuth.createUserWithEmailAndPassword(email, password));
   }
 
   SignIn(email: string, password: string): Observable<any> {
-    return of(this.afAuth.signInWithEmailAndPassword(email, password));
+    // Firebase Authentication の signInWithEmailAndPassword メソッドを使用し、Observable に変換
+    return from(this.afAuth.signInWithEmailAndPassword(email, password));
+  }
+
+  signOut(): Promise<void> {
+    return this.afAuth
+      .signOut()
+      .then(() => {
+        alert('User signed out successfully');
+      })
+      .catch((error) => {
+        console.error('Error signing out: ', error);
+      });
   }
 }

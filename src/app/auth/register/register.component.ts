@@ -52,12 +52,12 @@ export class RegisterComponent implements OnInit {
     let email = this.registrationForm.value['email'];
     let password = this.registrationForm.value['password'];
     let data: LoginData = { email: email ?? '', password: password ?? '' };
-    // this.authService.SignUp(data.email, data.password);
-    // this.authService.SignUp(data.email, data.password);
-    // .subscribe((answer: any) => {
-    //     console.log(answer);
-    //     this.showSpinner = false;
-    //     this.showMessage = true;
-    // });
+    this.authService
+      .SignUp(data.email, data.password)
+      .subscribe((answer: any) => {
+        console.log(answer);
+        this.showSpinner = false;
+        this.showMessage = true;
+      });
   }
 }

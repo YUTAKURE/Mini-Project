@@ -8,7 +8,12 @@ import { LoginData } from '../../login-data';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
+  submitted = false;
+  showSpinner = false;
+  showMessage = false;
+  errorMessage = '';
+
   loginForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -20,37 +25,46 @@ export class LoginComponent {
   get email() {
     return this.loginForm.get('email')!;
   }
+
   get password() {
     return this.loginForm.get('password')!;
   }
-  // get confirmPassword() { return this.registrationForm.get('confirmPassword')!; }
-
-  onSubmit(): void {
-    // this.submitted = false;
-    if (this.loginForm.invalid) return;
-    // console.log(JSON.stringify(this.loginForm.value, null, 2));
-  }
 
   constructor(public authService: AuthService) {}
+
   ngOnInit(): void {}
 
+  onSubmit(): void {
+    this.submitted = true;
+    this.showSpinner = true;
+    this.showMessage = false;
+    this.errorMessage = '';
+
+    if (this.loginForm.invalid) {
+      this.showSpinner = false;
+      return;
+    }
+
+    this.login(); // フォーム送信時にログイン処理を呼び出す
+  }
+
   login() {
-    // this.showSpinner = true;
-    // this.showMessage = false;
-    // this.submitted = true;
+    const email = this.loginForm.value['email'];
+    const password = this.loginForm.value['password'];
+    const data: LoginData = { email: email ?? '', password: password ?? '' };
 
-    if (this.loginForm.invalid) return;
-
-    // console.log(JSON.stringify(this.loginForm.value, null, 2));
-    let email = this.loginForm.value['email'];
-    let password = this.loginForm.value['password'];
-    let data: LoginData = { email: email ?? '', password: password ?? '' };
-    // // this.authService.SignUp(data.email, data.password);
-    // this.authService.SignIn(data.email, data.password);
-    // .subscribe(answer => {
-    //     console.log(answer);
-    //     this.showSpinner = false;
-    //     this.showMessage = true;
-    // });
+    this.authService.SignIn(data.email, data.password).subscribe({
+      next: (answer) => {
+        console.log(answer);
+        this.showSpinner = false;
+        this.showMessage = true;
+      },
+      error: (error) => {
+        console.error('Login failed', error);
+        this.showSpinner = false;
+        this.errorMessage =
+          'Login failed. Please check your email address and password.';
+      },
+    });
   }
 }

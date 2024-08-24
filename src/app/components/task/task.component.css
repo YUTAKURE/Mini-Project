@@ -12,3 +12,7 @@ span {
   color: rgb(176, 176, 176);
   margin-bottom: -15px;
 }
+
+button {
+  scale: 75%;
+}

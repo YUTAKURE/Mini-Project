@@ -1,20 +1,21 @@
 .box {
-  height: 80vh; /* ビューポートの高さの80%を使用 */
+  width: 90%;
+  height: 100vh; /* ビューポートの高さの80%を使用 */
 }
 
 .content-wrapper {
-  max-width: 1400px;
+  max-width: 1200px;
   margin: auto;
 }
 
 .container-wrapper {
   display: flex;
   justify-content: space-around;
+  gap: 25px;
 }
 
 .container {
   width: 400px;
-  margin: 0 25px 25px 0;
 }
 
 .list {

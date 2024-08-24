@@ -12,12 +12,12 @@
             </mat-form-field>
             <mat-form-field class="full-width">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password" name="password" id="password" formControlName="password"
-                    required>
+                <input type="password" matInput placeholder="Password" name="password" id="password"
+                    formControlName="password" required>
             </mat-form-field>
 
             <mat-card-actions>
-                <button mat-raised-button color="primary" type="submit" class="buttonSubmit" (click)=register()
+                <button mat-raised-button color="primary" type="submit" class="buttonSubmit" (click)='register()'
                     [disabled]="registrationForm.invalid">
                     Register
                 </button>

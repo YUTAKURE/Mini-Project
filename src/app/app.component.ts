@@ -11,6 +11,8 @@ export class AppComponent {
 
   user$: any;
 
+  ngOnInit() {}
+
   constructor(private auth: AuthService) {}
   login() {
     this.auth.login();

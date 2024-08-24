@@ -7,24 +7,31 @@
             </mat-form-field>
             <mat-form-field class="full-width">
                 <mat-label>Password</mat-label>
-                <input matInput placeholder="Password" name="password" id="password" formControlName="password"
-                    required>
+                <input type="password" matInput placeholder="Password" name="password" id="password"
+                    formControlName="password" required>
             </mat-form-field>
 
+            <!-- ローディングスピナーの表示 -->
+            <div *ngIf="showSpinner">
+                <mat-spinner mode="indeterminate" diameter="17"></mat-spinner>
+            </div>
+
+            <!-- エラーメッセージをフォーム内に表示 -->
+            <div *ngIf="errorMessage" class="error-message">
+                {{ errorMessage }}
+            </div>
+
             <mat-card-actions>
-                <button mat-raised-button color="primary" type="submit" class="buttonSubmit" (click)=login()
+                <button mat-raised-button color="primary" type="submit" class="buttonSubmit"
                     [disabled]="loginForm.invalid">
                     Login
                 </button>
             </mat-card-actions>
-            <!-- <div *ngIf="showSpinner">
-                <mat-spinner mode="indeterminate" diameter="17">
-                </mat-spinner>
-            </div>
 
+            <!-- ログイン成功メッセージの表示 -->
             <div *ngIf="showMessage">
-                <h3 style="color: blue;">Let's start. you are login</h3>
-            </div> -->
+                <h3 style="color: blue;">Let's start. You are logged in!</h3>
+            </div>
         </form>
     </mat-card-content>
 </div>
